@@ -52,3 +52,19 @@ class ProductItem {
 }
 
 let list = new ProductList();
+
+/* функция обработчик события для появления и скрытия модального окна с содержанием корзины */
+const basketBtnClickHandler = () => {
+    const modal = document.querySelector('.modal');
+    if (modal.classList.contains('hidden')) {
+    modal.classList.remove('hidden');
+    }
+    else {
+        modal.classList.add('hidden');
+    }
+}
+
+/* вешаем обработчик события на кнопку корзины */
+const basket = document.querySelector('.btn-cart');
+basket.addEventListener('click', basketBtnClickHandler);
+
