@@ -51,7 +51,58 @@ class ProductItem {
     }
 }
 
+/* класс Корзины */
+class Basket {
+    constructor(container = '.modal') {
+        this.container = container;
+        this.goodsBasket = {};
+        this.allProductsBasket = [];
+        this._getBasketProduct()
+            .then(data => {
+                this.goodsBasket = {...data};
+                console.log(this.goodsBasket);
+                this.render()
+        });
+    }
+
+    _getBasketProduct() {
+        return fetch(`${API}/getBasket.json`)
+            .then(result => result.json())
+            .catch(error => {
+                console.log(error);
+        })
+    }
+
+    render() {
+        const block = document.querySelector(this.container);
+        for (let product of this.goodsBasket.contents) {
+            const productObj = new BasketItem(product);
+            this.allProductsBasket.push(productObj);
+            block.insertAdjacentHTML('beforeend', productObj.render());
+        }
+    }
+}
+
+/* класс Элемента Корзины */
+class BasketItem {
+    constructor(product) {
+        this.title = product.product_name;
+        this.price = product.price;
+        this.id = product.id_product;
+        this.quantity = product.quantity;
+    }
+
+    render() {
+        return `<div class="basket-item">
+                    <h3>${this.title}</h3>
+                    <p>Цена товара: ${this.price}</p>
+                    <p>Количество: ${this.quantity}</p>
+                </div>`
+        }
+}
+
 let list = new ProductList();
+let basketList = new Basket();
 
 /* функция обработчик события для появления и скрытия модального окна с содержанием корзины */
 const basketBtnClickHandler = () => {

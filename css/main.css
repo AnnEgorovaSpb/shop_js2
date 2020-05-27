@@ -5,7 +5,7 @@ header {
 }
 
 .hidden {
-    display: none;
+    visibility: hidden;
 }
 
 .btn-cart {
@@ -27,14 +27,28 @@ header {
 }
 
 .modal {
-    width: 300px;
-    height: 200px;
-    background-color: #fff;
+    width: 60%;
+    padding: 30px;
+    background-color: #ececec;
     position: fixed;
     top: 75px;
-    right: 28px;
+    right: 20%;
     border: 1px solid #ccc;
     border-radius: 4px;
+}
+
+.basket-item {
+    margin: 0 0 20px 0;
+    display: flex;
+    align-items: baseline;
+}
+
+.basket-item h3 {
+    margin: 0 40px 0 0;
+}
+
+.basket-item p {
+    margin: 0 40px 0 0;
 }
 
 .products {
