@@ -12,15 +12,15 @@
         <div class="cart">
             <form action="#" class="search-form">
                 <input type="text" class="search-field" v-model="searchLine">
-                <button class="btn-search" type="submit" @click="viewCart()">
+                <button class="btn-search" type="submit" @click="filterGoods()">
                     <i class="fas fa-search"></i>
                 </button>
             </form>
-            <button class="btn-cart" type="button" @click="viewCart()">Корзина</button>
+            <button class="btn-cart" type="button" @click="isVisibleCart=!isVisibleCart">Корзина</button>
             <div class="cart-block" v-bind:class="{ invisible: isVisibleCart }">
                 <div class="cart-item">
                     <div class="product-bio">
-                        <img src="{{ imgCatalog }}" alt="Some image">
+                        <img :src="imgCatalog" alt="Some image">
                         <div class="product-desc">
                             <p class="product-title"></p>
                             <p class="product-quantity"></p>

@@ -32,14 +32,8 @@ const app = new Vue({
                 block.classList.remove('invisible');
             }
             })
-        },
-        viewCart() {
-            if(!this.isVisibleCart) {
-                this.isVisibleCart = !this.isVisibleCart;
-            } else {
-                this.isVisibleCart = !this.isVisibleCart;
-            }
         }
+
     },
     mounted(){
        this.getJson(`${API + this.catalogUrl}`)
