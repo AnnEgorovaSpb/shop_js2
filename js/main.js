@@ -7,7 +7,8 @@ const app = new Vue({
         products: [],
         imgCatalog: 'https://placehold.it/200x150',
         filtered: [],
-        searchLine: ''
+        searchLine: '',
+        isVisibleCart: true
     },
     methods: {
         getJson(url){
@@ -31,6 +32,13 @@ const app = new Vue({
                 block.classList.remove('invisible');
             }
             })
+        },
+        viewCart() {
+            if(!this.isVisibleCart) {
+                this.isVisibleCart = !this.isVisibleCart;
+            } else {
+                this.isVisibleCart = !this.isVisibleCart;
+            }
         }
     },
     mounted(){
