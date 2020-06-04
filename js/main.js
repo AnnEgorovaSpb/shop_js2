@@ -25,9 +25,9 @@ const app = new Vue({
                     if(data.result === 1){
                        let find = this.cartItems.find(el => el.id_product === item.id_product);
                        if(find){
-                           find .quantity++;
+                           find.quantity++;
                        } else {
-                           const prod = Object.assign({quantity: 1}, item);//создание нового объекта на основе двух, указанных в параметрах
+                           const prod = Object.assign({quantity: 1}, item);
                            this.cartItems.push(prod)
                        }
                     }
