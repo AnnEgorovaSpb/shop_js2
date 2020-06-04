@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Интернет-магазин</title>
+    <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
@@ -10,26 +11,27 @@
     <header>
         <div class="logo">E-shop</div>
         <div class="cart">
-            <form action="#" class="search-form">
-                <input type="text" class="search-field" v-model="searchLine">
-                <button class="btn-search" type="submit" @click="filterGoods()">
+            <form action="#" class="search-form" @submit.prevent="filter">
+                <input type="text" class="search-field" v-model="userSearch">
+                <button type="submit" class="btn-search">
                     <i class="fas fa-search"></i>
                 </button>
             </form>
-            <button class="btn-cart" type="button" @click="isVisibleCart=!isVisibleCart">Корзина</button>
-            <div class="cart-block" v-bind:class="{ invisible: isVisibleCart }">
-                <div class="cart-item">
+            <button class="btn-cart" type="button" @click="showCart = !showCart">Корзина</button>
+            <div class="cart-block" v-show="showCart">
+                <p v-if="!cartItems.length">Cart is empty</p>
+                <div class="cart-item" v-for="item of cartItems" :key="item.id_product">
                     <div class="product-bio">
-                        <img :src="imgCatalog" alt="Some image">
+                        <img :src="imgCart" alt="Some img">
                         <div class="product-desc">
-                            <p class="product-title"></p>
-                            <p class="product-quantity"></p>
-                            <p class="product-single-price"></p>
+                            <div class="product-title">{{ item.product_name }}</div>
+                            <div class="product-quantity">Quantity: {{ item.quantity }}</div>
+                            <div class="product-single-price">$ {{ item.price }} each</div>
                         </div>
                     </div>
                     <div class="right-block">
-                        <p class="product-price"></p>
-                        <button class="del-btn">&times;</button>
+                        <div class="product-price">{{item.quantity*item.price}}</div>
+                        <button class="del-btn" @click="remove(item)">&times;</button>
                     </div>
                 </div>
             </div>
@@ -37,11 +39,11 @@
     </header>
     <main>
         <div class="products">
-            <div class="product-item" v-bind:id="product.id_product" v-for="product of products" :key="product.id_product">
-                <img :src="imgCatalog" alt="Some img">
+            <div class="product-item" v-for="product of filtered" :key="product.id_product">
+                <img :src="imgProduct" alt="Some img">
                 <div class="desc">
                     <h3>{{product.product_name}}</h3>
-                    <p>{{product.price}} $</p>
+                    <p>{{product.price}}</p>
                     <button class="buy-btn" @click="addProduct(product)">Купить</button>
                 </div>
             </div>
@@ -53,18 +55,3 @@
     <script src="js/main.js"></script>
 </body>
 </html>
-
-<!--<div class="cart-item" data-id="${this.id_product}">-->
-    <!--<div class="product-bio">-->
-        <!--<img src="${this.img}" alt="Some image">-->
-        <!--<div class="product-desc">-->
-            <!--<p class="product-title">${this.product_name}</p>-->
-            <!--<p class="product-quantity">Quantity: ${this.quantity}</p>-->
-            <!--<p class="product-single-price">$${this.price} each</p>-->
-        <!--</div>-->
-    <!--</div>-->
-    <!--<div class="right-block">-->
-        <!--<p class="product-price">${this.quantity*this.price}</p>-->
-        <!--<button class="del-btn" data-id="${this.id_product}">&times;</button>-->
-    <!--</div>-->
-<!--</div>-->
